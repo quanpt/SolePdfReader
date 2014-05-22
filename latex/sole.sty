@@ -1,0 +1,65 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{sole}[2014/01/01 Sole Package]
+
+% Usage:
+% \usepackage{sole}
+% \soleinit[dbid]{baseurl}{filename}
+%    where url  = url to the base location of the database file
+%          filename = a tarball of the database directories
+%          dbid = the numbers in the name of directory containing database files
+% \sole[option]{itemid}{label}
+%    where itemid = id of provenance artifact obtained from the provenance browser
+%          label  = label to appear in pdf document
+%          option = (optional) dbid=..., type=..., part=...
+% \solesetdb{dbid} - reset the dbid to a new id
+%
+% Note: 
+%  1. Use \textasciitilde or \soletilde for "~" in url
+%  2. Somehow \sole command cannot be used in abstract of sig-alternate
+
+\RequirePackage{pgfkeys}
+\RequirePackage{xparse}
+\RequirePackage[hidelinks]{hyperref}
+
+\bgroup
+  \catcode`\~=12%
+  \gdef\soletilde{~}%
+\egroup
+
+\providecommand{\soleinit}[3][-1]{
+	\newcounter{soledbid}
+	\setcounter{soledbid}{#1}
+	\newcommand{\solebaseurl}{#2}
+	\hypersetup{
+	  pdfinfo={
+	    sole.dbid={#1},
+	    sole.baseurl={#2},
+	    sole.file={#3}
+	  }
+	}
+}
+\providecommand{\solesetdb}[1]{\setcounter{soledbid}{#1}}
+
+%===== implementation using xparse =====
+%\usepackage{xparse}
+\DeclareDocumentCommand{\soleb}{ O{alltype} O{allpart} O{\arabic{soledbid}} m m }{%
+	\href{\solebaseurl/solelink?dbid/#3/type/#1/part/#2/id/#4}{#5}}
+
+%===== implementation use pgfkeys =====
+%\usepackage{pgfkeys}
+\pgfkeys{
+ /mysole/.is family, /mysole,
+ default/.style = 
+   {dbid = \arabic{soledbid}, type = alltype,
+   part = allpart},
+ dbid/.estore in = \mysoledbid,
+ type/.estore in = \mysoletype,
+ part/.estore in = \mysolepart,
+}
+\newcommand\sole[3][]{%
+	\pgfkeys{/mysole, default, #1}%
+	\href{\solebaseurl/solelink.html?dbid/\mysoledbid/type/\mysoletype/part/\mysolepart/id/#2}{#3}}
+
+%\providecommand{\sole}[4]{\href{http://people.cs.uchicago.edu/~quanpt/solelink?dbid/\arabic{soledbid}/type/#2/id/#3/part/#4}{#1}}
+
+\endinput

@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{lipsum}
+\usepackage{sole}
+
+%opening
+\title{Demo of SOLE Pdf Reader}
+
+\author{Quan Pham \and Tanu Malik \and Ian Foster}
+
+%\authorinfo{Quan Pham}
+%{Dept. of Computer Science\\
+%The University of Chicago\\
+%Chicago, IL 60637, USA}
+%{Email: quanpt@cs.uchicago.edu}
+%
+%\authorinfo{Tanu Malik}
+%{Computation Institute\\
+%The University of Chicago\\
+%Chicago, IL 60637, USA}
+%{Email: tanu@ci.uchicago.edu}
+%
+%\authorinfo{Ian Foster}
+%{Computation Institute\\
+%The University of Chicago\\
+%Chicago, IL 60637, USA}
+%{Email: foster@ci.uchicago.edu}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\lipsum[1]
+\end{abstract}
+
+%\category{CR-number}{subcategory}{third-level}
+
+\section{Introduction}
+
+\soleinit{http://people.cs.uchicago.edu/\textasciitilde quanpt/sole/repo}{azure.npb.tgz}
+
+Ok, these are real examples from AWS NASA Parallel Benchmark in my nwcapture paper:
+\begin{itemize}
+\item \sole{5230.1397927642454557}{mpirun} for \sole[dbid=500975507.1774295448]{49266.1397927643807395}{SP-MZ}
+\item \sole{5192.1397927634570630}{mpirun} for \sole{5193.1397927635749534}{ssh} $\longrightarrow$ \sole[dbid=252906175.884214668]{48697.1397927637202489}{hydra-pmi-proxy} $\longrightarrow$ \sole[dbid=252906175.884214668]{48702.1397927637286544}{BT-MZ}
+\end{itemize}
+produced by these codes:
+{\small
+\begin{verbatim}
+\soleinit{http://people.cs.uchicago.edu/\textasciitilde quanpt/sole/repo}{azure.npb.tgz}
+\sole{5230.1397927642454557}{mpirun} for
+   \sole[dbid=500975507.1774295448]{49266.1397927643807395}{SP-MZ}
+\sole{5192.1397927634570630}{mpirun} for 
+   \sole{5193.1397927635749534}{ssh} 
+   $\longrightarrow$
+   \sole[dbid=252906175.884214668]{48697.1397927637202489}{hydra-pmi-proxy} 
+   $\longrightarrow$
+   \sole[dbid=252906175.884214668]{48702.1397927637286544}{BT-MZ}
+\end{verbatim}
+}
+The line \verb|\sole[xxx]{yyy}{some text}| can be copied from SOLE Pdf Reader's provenance graph window.
+
+\lipsum[10]
+
+%\documentclass[pdfencoding=unicode]{article}
+%\usepackage[hidelinks]{hyperref}
+
+\begin{thebibliography}{10}
+
+\bibitem{tcpdump}
+{TCPDUMP/LIBPCAP} public repository.
+
+\bibitem{npb}
+D.~H. Bailey, E.~Barszcz, J.~T. Barton, D.~S. Browning, R.~L. Carter, L.~Dagum,
+  R.~A. Fatoohi, P.~O. Frederickson, T.~A. Lasinski, R.~S. Schreiber, et~al.
+\newblock The {NAS} parallel benchmarks.
+\newblock {\em International Journal of High Performance Computing
+  Applications}, 5(3):63–73, 1991.
+
+\bibitem{rdcep2}
+N.~Best, J.~Elliott, and I.~Foster.
+\newblock Synthesis of a complete land {Use/Land} cover dataset for the
+  conterminous united states.
+\newblock {\em {SSRN} {eLibrary}}, 2012.
+
+\end{thebibliography}
+
+\end{document}
